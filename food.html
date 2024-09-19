@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food & Cafes in Jaipur</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        nav {
+            background: #e34076; /* Coral color */
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s, transform 0.3s;
+        }
+        nav ul li a:hover {
+            color: #000000; /* Yellow */
+            transform: scale(1.1);
+        }
+        h1 {
+            text-align: center;
+            margin-top: 90px; /* Added margin for fixed navbar */
+            font-size: 2.5rem;
+            color: #000000ba; /* Coral color */
+            animation: fadeIn 1s ease-in-out;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: calc(33% - 40px); /* Responsive cards */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0; /* Start hidden */
+            transform: translateY(20px); /* Start below */
+            animation: fadeIn 0.5s forwards; /* Animation on load */
+        }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid #e34076; /* Coral color */
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-content h2 {
+            font-size: 1.5rem;
+            color: #e34076; /* Coral color */
+            margin: 10px 0;
+        }
+        .card-content p {
+            margin-bottom: 15px;
+            color: #555; /* Dark gray */
+        }
+        .next-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e34076; /* Coral color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .next-button:hover {
+            background-color: #e91e63; /* Pink */
+            transform: scale(1.05);
+        }
+        .overlay {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* 60% transparency */
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+        .overlay-content {
+            background: rgba(0, 0, 0, 0.516);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 80%;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .info-box {
+            background: #fff;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: calc(20% - 20px); /* Responsive boxes */
+        }
+        .info-box img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .info-box h3 {
+            color: #e34076; /* Coral color */
+            margin: 10px 0;
+        }
+        .info-box p {
+            color: #555; /* Dark gray */
+        }
+        .info-box a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #e34076; /* Coral color */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .info-box a:hover {
+            color: #000000; /* Coral color */
+            background-color: #e34076; /* Change background on hover */
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #e34076; /* Coral color */
+            color: white;
+            margin-top: 20px;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="attractions.html">Attractions</a></li>
+            <li><a href="food.html">Food & Cafes</a></li>
+            <li><a href="events.html">Events</a></li>
+        </ul>
+    </nav>
+
+    <h1>Food & Cafes in Jaipur</h1>
+
+    <div class="container">
+
+        <div class="card">
+            <img src="rajasthani.jpg" alt="Rajasthani Thali">
+            <div class="card-content">
+                <h2>Traditional Rajasthani Cuisine</h2>
+                <p>Experience rich flavors with dishes like Dal Baati Churma and Gatte Ki Sabzi, best enjoyed at Chokhi Dhani during lunch.</p>
+                <a href="#next" class="next-button" onclick="openOverlay('overlay1')">Explore More</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="streetfood.jpg" alt="Street Food in Jaipur">
+            <div class="card-content">
+                <h2>Street Food Delights</h2>
+                <p>From Pani Puri to Kachori, discover vibrant street food in local markets during the evening. Don't miss Lassiwala!</p>
+                <a href="#next" class="next-button" onclick="openOverlay('overlay2')">Explore More</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="cafe.webp" alt="Café in Jaipur">
+            <div class="card-content">
+                <h2>Cafés with a Twist</h2>
+                <p>Relax at cafés like Book & Brew or Tapri, offering great coffee and unique menus—perfect for brunch.</p>
+                <a href="#next" class="next-button" onclick="openOverlay('overlay3')">Explore More</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="finedine.jpg" alt="Fine Dining">
+            <div class="card-content">
+                <h2>Fine Dining Experiences</h2>
+                <p>Indulge in luxury dining at Suvarna Mahal or Jal Mahal. Best enjoyed for dinner with an exquisite ambiance.</p>
+                <a href="#next" class="next-button" onclick="openOverlay('overlay4')">Explore More</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="overlay" id="overlay1">
+        <div class="overlay-content">
+            <div class="info-box">
+                <img src="chokidhani.jpg" alt="Chokhi Dhani">
+                <h3>Chokhi Dhani</h3>
+                <p>Experience traditional Rajasthani food in a village-themed setting.</p>
+                <a href="https://chokhidhani.com/village-fair-restaurant-jaipur/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="lassi.jpg" alt="Lassiwala">
+                <h3>Lassiwala</h3>
+                <p>Famous for its creamy lassis, a must-try when in Jaipur!</p>
+                <a href="https://www.instagram.com/explore/locations/240097394/lassiwala-jaipur/?hl=en" target="_blank">Visit Instagram</a>
+            </div>
+            <div class="info-box">
+                <img src="suryamahal.avif" alt="Book & Brew">
+                <h3>Surya Mahal</h3>
+                <p>Three types of thalis are served here to make decision-making an easy job for the guests.</p>
+                <a href="https://www.oberoihotels.com/hotels-in-jaipur-rajvilas-resort/restaurants/surya-mahal/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="suvarna.webp" alt="Suvarna Mahal">
+                <h3>Suvarna Mahal</h3>
+                <p>Enjoy a luxurious dining experience in a royal setting.</p>
+                <a href="https://www.tajhotels.com/en-in/hotels/rambagh-palace-jaipur/restaurants/suvarna-mahal" target="_blank">Visit Website</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay2">
+        <div class="overlay-content">
+            <div class="info-box">
+                <img src="narsingh.jpg" alt="Chokhi Dhani">
+                <h3>Narsingh Misthan Bhandar</h3>
+                <p>Experience traditional Rajasthan's  Jaipur's famous Pyaaz (onion) kachori.</p>
+                <a href="" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="lassi.jpg" alt="Lassiwala">
+                <h3>Lassiwala</h3>
+                <p>Famous for its creamy lassis, a must-try when in Jaipur!</p>
+                <a href="https://www.instagram.com/explore/locations/240097394/lassiwala-jaipur/?hl=en" target="_blank">Visit Instagram</a>
+            </div>
+            <div class="info-box">
+                <img src="sahu.jpg" alt="Book & Brew">
+                <h3>Sahu Tea Stall</h3>
+                <p> is a beloved local eatery renowned for its refreshing and delicious chai (tea). This iconic tea stall is famous for its rich, aromatic tea, often served with crispy snacks like samosas and biscuits.</p>
+                <a href="https://sahuchaiwala.com/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="gcdairy.jpeg" alt="Suvarna Mahal">
+                <h3>G-C Dairy</h3>
+                <p>This is a dessert place where you get tasty Indian desserts</p>
+                <a href="https://www.tajhotels.com/en-in/hotels/rambagh-palace-jaipur/restaurants/suvarna-mahal" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="samrat.jpeg" alt="Suvarna Mahal">
+                <h3>Samrat</h3>
+                <p>establishment known for its authentic Rajasthani cuisine. Located in Jaipur, this restaurant offers a warm and inviting atmosphere, making it a favorite spot for both locals and tourists.</p>
+                <a href="https://www.instagram.com/samratrestaurant_jaipur/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="laxmi.jpg" alt="Suvarna Mahal">
+                <h3>Laxmi Misthan Bhandar (LMB)</h3>
+                <p>renowned for its exquisite range of traditional Rajasthani sweets, including the famous Ghewar, as well as a variety of snacks and savory dishes.</p>
+                <a href="https://lmbsweets.com/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="gulabji.jpg" alt="Lassiwala">
+                <h3>Gulab Ji Chai Wale</h3>
+                <p>Gulab Ji Chai Wale is a popular tea stall in Jaipur, known for its delightful masala chai and snacks. Located in a bustling area,</p>
+                <a href="https://www.instagram.com/gulab_ji_chai/?hl=en" target="_blank">Visit Instagram</a>
+            </div>
+            <div class="info-box">
+                <img src="mahaveer.jpeg" alt="Lassiwala">
+                <h3>Mahaveer Rabdi Bhandar</h3>
+                <p>Gulab Ji Chai Wale is a popular tea stall in Jaipur, known for its delightful masala chai and snacks. Located in a bustling area,</p>
+                <a href="https://www.instagram.com/mahaveerrabri/" target="_blank">Visit Instagram</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay3">
+        <div class="overlay-content">
+            <div class="info-box">
+                <img src="chokidhani.jpg" alt="Chokhi Dhani">
+                <h3>Chokhi Dhani</h3>
+                <p>Experience traditional Rajasthani food in a village-themed setting.</p>
+                <a href="https://chokhidhani.com/village-fair-restaurant-jaipur/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="lassi.jpg" alt="Lassiwala">
+                <h3>Lassiwala</h3>
+                <p>Famous for its creamy lassis, a must-try when in Jaipur!</p>
+                <a href="https://www.instagram.com/explore/locations/240097394/lassiwala-jaipur/?hl=en" target="_blank">Visit Instagram</a>
+            </div>
+            <div class="info-box">
+                <img src="suryamahal.avif" alt="Book & Brew">
+                <h3>Surya Mahal</h3>
+                <p>Three types of thalis are served here to make decision-making an easy job for the guests.</p>
+                <a href="https://www.oberoihotels.com/hotels-in-jaipur-rajvilas-resort/restaurants/surya-mahal/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="suvarna.webp" alt="Suvarna Mahal">
+                <h3>Suvarna Mahal</h3>
+                <p>Enjoy a luxurious dining experience in a royal setting.</p>
+                <a href="https://www.tajhotels.com/en-in/hotels/rambagh-palace-jaipur/restaurants/suvarna-mahal" target="_blank">Visit Website</a>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay4">
+        <div class="overlay-content">
+            <div class="info-box">
+                <img src="chokidhani.jpg" alt="Chokhi Dhani">
+                <h3>Chokhi Dhani</h3>
+                <p>Experience traditional Rajasthani food in a village-themed setting.</p>
+                <a href="https://chokhidhani.com/village-fair-restaurant-jaipur/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="lassi.jpg" alt="Lassiwala">
+                <h3>Lassiwala</h3>
+                <p>Famous for its creamy lassis, a must-try when in Jaipur!</p>
+                <a href="https://www.instagram.com/explore/locations/240097394/lassiwala-jaipur/?hl=en" target="_blank">Visit Instagram</a>
+            </div>
+            <div class="info-box">
+                <img src="suryamahal.avif" alt="Book & Brew">
+                <h3>Surya Mahal</h3>
+                <p>Three types of thalis are served here to make decision-making an easy job for the guests.</p>
+                <a href="https://www.oberoihotels.com/hotels-in-jaipur-rajvilas-resort/restaurants/surya-mahal/" target="_blank">Visit Website</a>
+            </div>
+            <div class="info-box">
+                <img src="suvarna.webp" alt="Suvarna Mahal">
+                <h3>Suvarna Mahal</h3>
+                <p>Enjoy a luxurious dining experience in a royal setting.</p>
+                <a href="https://www.tajhotels.com/en-in/hotels/rambagh-palace-jaipur/restaurants/suvarna-mahal" target="_blank">Visit Website</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Jaipur Food & Cafes. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function openOverlay(overlayId) {
+            document.getElementById(overlayId).style.display = 'flex';
+        }
+
+        document.querySelectorAll('.overlay').forEach(overlay => {
+            overlay.onclick = function() {
+                this.style.display = 'none';
+            };
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attractions in Jaipur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif; 
+            background: linear-gradient(to right,  #d2367210 , #d2367210 ,#d2367210 );  
+            color: #444;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(to right,  #000000f0 , #000000f0, #000000f0);
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            color: #d23672;
+            font-size: 2.5em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.1em;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #d23672;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .attraction-card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            width: calc(33% - 30px);
+            cursor: pointer;
+        }
+        
+        .attraction-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .attraction-card:hover {
+            transform: scale(1.05);
+        }
+
+        .attraction-details {
+            padding: 15px;
+        }
+
+        .attraction-details h3 {
+            font-family: 'Lora', serif;
+            font-size: 1.6em;
+        }
+
+        .timing, .charges {
+            font-weight: 600;
+            color: #d23672;
+        }
+
+        .enlarged {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+
+        .enlarged.show {
+            display: flex;
+        }
+
+        .enlarged-content {
+            background: #fff;
+            border-radius: 15px;
+            display: flex;
+            overflow: hidden;
+            width: 80%;
+            height: 70%;
+        }
+
+        .enlarged-content img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .enlarged-details {
+            padding: 20px;
+            width: 50%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: #f76c6c;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #111;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .attraction-card {
+                width: calc(50% - 30px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .attraction-card {
+                width: 100%;
+            }
+
+            .enlarged-content {
+                flex-direction: column;
+            }
+
+            .enlarged-content img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Explore Jaipur's Attractions</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="history.html">History</a></li>
+            <li><a href="attractions.html">Attractions</a></li>
+            <li><a href="food.html">Food & Cafe</a></li>
+            <li><a href="events.html">Events</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- Attraction Cards -->
+    <!-- Amber Fort -->
+    <div class="attraction-card" onclick="showDetails('Amber Fort', 'The majestic Amber Fort, perched on a hill, is known for its artistic elements such as mirror work and beautiful courtyards. Amber Fort, located about 11 kilometers from Jaipur, Rajasthan, is a stunning example of Rajput architecture. Built in the 16th century by Raja Man Singh I, it served as the primary residence for the Kachwaha rulers. The fort is known for its majestic palaces, beautiful gardens, and intricate marble and red sandstone structures.', 'amber.jpg', '8:00 AM - 5:30 PM', '₹100 for Indians, ₹500 for Foreigners')">
+        <img src="amber.jpg" alt="Amber Fort">
+        <div class="attraction-details">
+            <h3>Amber Fort</h3>
+            <p>The majestic Amber Fort, perched on a hill, is known for its artistic elements such as mirror work and beautiful courtyards.</p>
+            <p class="timing">Timings: 8:00 AM - 5:30 PM</p>
+            <p class="charges">Entry Fee: ₹100 for Indians, ₹500 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat Amber Fort -->
+    <div class="attraction-card" onclick="showDetails('Gaitore Ki Chattriyan', 'Gaitore Ki Chhatriyan, located about 12 kilometers from Jaipur, Rajasthan, is a serene and picturesque site known for its stunning royal cenotaphs. This site serves as the cremation ground for the Kachwaha dynasty, where many Rajput kings and queens were honored with beautifully crafted memorials.', 'gaitore.png', '8:00 AM - 5:30 PM', '₹100 for Indians, ₹500 for Foreigners')">
+        <img src="gaitore.png" alt="Amber Fort">
+        <div class="attraction-details">
+            <h3>Gaitore Ki Chattriyan</h3>
+            <p> This site serves as the cremation ground for the Kachwaha dynasty, where many Rajput kings and queens were honored with beautifully crafted memorials.</p>
+            <p class="timing">Timings: 9:00 AM - 5:30 PM</p>
+            <p class="charges">Entry Fee: ₹50 for Indians, ₹100 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Hawa Mahal -->
+    <div class="attraction-card" onclick="showDetails('Hawa Mahal', 'Hawa Mahal, with its intricate windows, is a palace that offers an awe-inspiring view of Jaipur\'s bustling streets . Hawa Mahal, also known as the Palace of Winds, is an iconic landmark located in Jaipur, Rajasthan. Built in 1799 by Maharaja Sawai Pratap Singh, this stunning structure was designed by architect Lal Chand Usta to allow royal women to observe street festivities without being seen ', 'hawamahal.jpg', '9:00 AM - 4:30 PM', '₹50 for Indians, ₹200 for Foreigners')">
+        <img src="hawamahal.jpg" alt="Hawa Mahal">
+        <div class="attraction-details">
+            <h3>Hawa Mahal</h3>
+            <p>Hawa Mahal, with its intricate windows, is a palace that offers an awe-inspiring view of Jaipur's bustling streets.</p>
+            <p class="timing">Timings: 9:00 AM - 4:30 PM</p>
+            <p class="charges">Entry Fee: ₹50 for Indians, ₹200 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat Hawa Mahal -->
+    <div class="attraction-card" onclick="showDetails('Panna Meena Ka Kund', 'Panna Meena Ka Kund, located near Amber Fort in Jaipur, Rajasthan, is a stunning stepwell known for its unique architecture and historical significance. Built during the 16th century, it served as a vital water source for the local community and was a popular bathing spot.', 'panna.jpg', '6:00 AM - 6:30 PM', 'FREE for all')">
+        <img src="Panna.jpg" alt="Hawa Mahal">
+        <div class="attraction-details">
+            <h3>Panna Meena Ka Kund</h3>
+            <p>Panna Meena Ka Kund, located near Amber Fort in Jaipur, Rajasthan, is a stunning stepwell known for its unique architecture .</p>
+            <p class="timing">Timings: 6:00 AM - 6:30 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- City Palace -->
+    <div class="attraction-card" onclick="showDetails('City Palace', 'The City Palace showcases a blend of Mughal and Rajput architecture, housing museums that offer a glimpse into royal life.The City Palace in Jaipur is a magnificent royal residence that exemplifies the rich cultural heritage and architectural brilliance of Rajasthan. Constructed in the 18th century by Maharaja Sawai Jai Singh II, the palace complex showcases a harmonious blend of Mughal, Rajput, and European architectural styles.', 'citypalace.webp', '9:00 AM - 4:30 PM', '₹700 for Indians, ₹2000 for Foreigners')">
+        <img src="citypalace.webp" alt="City Palace">
+        <div class="attraction-details">
+            <h3>City Palace</h3>
+            <p>The City Palace showcases a blend of Mughal and Rajput architecture, housing museums that offer a glimpse into royal life.</p>
+            <p class="timing">Timings: 9:30 AM - 5:00 PM</p>
+            <p class="charges">Entry Fee: ₹700 for Indians, ₹2000 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat City Palace -->
+    <div class="attraction-card" onclick="showDetails('WORLD TRADE PARK (WTP)', 'World Trade Park (WTP) is a prominent commercial and shopping destination located in the heart of Jaipur, Rajasthan. Opened in 2012, it is designed to be a hub for trade, commerce, and entertainment, bringing together local and international businesses under one roof.', 'wtp.webp', '9:30 AM - 10:00 PM', 'FREE for  All')">
+        <img src="wtp.webp" alt="City Palace">
+        <div class="attraction-details">
+            <h3>WORLD TRADE PARK (WTP)</h3>
+            <p>World Trade Park (WTP) is a prominent commercial and shopping destination</p>
+            <p class="timing">Timings: 9:30 AM - 10:00 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- Nahargarh Fort -->
+    <div class="attraction-card" onclick="showDetails('Nahargarh Fort', 'Nahargarh Fort offers stunning views of the Pink City and is an excellent place for sunset photography.Nahargarh Fort, perched on the Aravalli hills overlooking Jaipur, Rajasthan, was built in 1734 by Maharaja Sawai Jai Singh II as a retreat and defense fort. The name Nahargarh translates to Abode of Tigers, reflecting its significance and majestic location.', 'NARGARH.AVIF', '10:00 AM - 5:30 PM', '₹50 for Indians, ₹200 for Foreigners')">
+        <img src="nargarh.avif" alt="Nahargarh Fort">
+        <div class="attraction-details">
+            <h3>Nahargarh Fort</h3>
+            <p>Nahargarh Fort offers stunning views of the Pink City and is an excellent place for sunset photography.</p>
+            <p class="timing">Timings: 10:00 AM - 5:30 PM</p>
+            <p class="charges">Entry Fee: ₹50 for Indians, ₹200 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat Nahargarh Fort -->
+    <div class="attraction-card" onclick="showDetails('Kanak Ghati', 'Kanak Ghati, located in the picturesque foothills of the Nahargarh Hills, is a beautiful garden and temple complex situated just outside Jaipur, Rajasthan. Established in the late 18th century by Maharaja Sawai Jai Singh II, it is a serene spot that combines natural beauty with spiritual significance.', 'kanakghati.webp', '6:00 AM - 8:30 PM', 'FREE for  All')">
+        <img src="kanakghati.webp" alt="Nahargarh Fort">
+        <div class="attraction-details">
+            <h3>Kanak Ghati</h3>
+            <p>Kanak Ghati, located in the picturesque foothills of the Nahargarh Hills, is a beautiful garden and temple complex situated .</p>
+            <p class="timing">Timings: 6:00 AM - 8:30 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- Jaigarh Fort -->
+    <div class="attraction-card" onclick="showDetails('Jaigarh Fort', 'Jaigarh Fort is famous for its cannon, Jaivana, which is one of the largest in the world.Jaigarh Fort, located on the Aravalli hills about 15 kilometers from Jaipur, Rajasthan, is a formidable fortress known for its impressive architecture and rich history. Built in the 18th century by Maharaja Sawai Jai Singh II, it was constructed to protect the Amber Fort and the royal treasures.', 'jaigarh.jpg', '9:00 AM - 5:30 PM', '₹100 for Indians, ₹500 for Foreigners')">
+        <img src="jaigarh.jpg" alt="Jaigarh Fort">
+        <div class="attraction-details">
+            <h3>Jaigarh Fort</h3>
+            <p>Jaigarh Fort is famous for its cannon, Jaivana, which is one of the largest in the world.</p>
+            <p class="timing">Timings: 9:00 AM - 5:30 PM</p>
+            <p class="charges">Entry Fee: ₹100 for Indians, ₹500 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat Jaigarh Fort -->
+    <div class="attraction-card" onclick="showDetails('Tal Katora', 'Tal Katora, also known as the Lake of Bowls, is a serene water reservoir located near Jaipur, Rajasthan. It was constructed during the reign of Maharaja Sawai Jai Singh II in the 18th century and served as a crucial water source for the city.', 'talkatora.jpg', '9:00 AM - 6:30 PM', 'FREE for All')">
+        <img src="talkatora.jpg" alt="Jaigarh Fort">
+        <div class="attraction-details">
+            <h3>Tal Katora</h3>
+            <p>Tal Katora, also known as the "Lake of Bowls," is a serene water reservoir located near Jaipur.</p>
+            <p class="timing">Timings: 9:00 AM - 6:30 PM</p>
+            <p class="charges">Entry Fee: FREE for All</p>
+        </div>
+    </div>
+    <!-- Jantar Mantar -->
+    <div class="attraction-card" onclick="showDetails('Jantar Mantar', 'Jantar Mantar is an astronomical observatory that houses the world\'s largest stone sundial.Jantar Mantar, located in the heart of Jaipur, Rajasthan, is an astronomical observatory built in the 18th century by Maharaja Sawai Jai Singh II. It is a UNESCO World Heritage Site and is renowned for its unique architectural and astronomical significance.', 'jantarmantar.jpg', '9:00 AM - 5:30 PM', '₹50 for Indians, ₹200 for Foreigners')">
+        <img src="jantarmantar.jpg" alt="Jantar Mantar">
+        <div class="attraction-details">
+            <h3>Jantar Mantar</h3>
+            <p>Jantar Mantar is an astronomical observatory that houses the world's largest stone sundial.</p>
+            <p class="timing">Timings: 9:00 AM - 5:30 PM</p>
+            <p class="charges">Entry Fee: ₹50 for Indians, ₹200 for Foreigners</p>
+        </div>
+    </div>
+    <!-- Repeat Jantar Mantar -->
+    <div class="attraction-card" onclick="showDetails('Govind Dev Ji', 'Govind Dev Ji Temple, located in the City Palace complex of Jaipur, is a significant Hindu temple dedicated to Lord Krishna, built in the 18th century by Maharaja Sawai Jai Singh II. This temple is renowned for its exquisite Rajput architecture, featuring intricate carvings and beautiful frescoes that adorn the altar of Govind Dev Ji, an incarnation of Lord Krishna. It holds immense cultural and spiritual significance, especially during festivals when it attracts large crowds of devotees.', 'govinddevji.jpg', '4:00 AM - 9:00 PM', 'FREE for  All')">
+        <img src="govinddevji.jpg" alt="Jantar Mantar">
+        <div class="attraction-details">
+            <h3>Govind Dev Ji</h3>
+            <p>Govind Dev Ji Temple, located in the City Palace complex of Jaipur, Rajasthan, is a prominent Hindu temple dedicated to Lord Krishna</p>
+            <p class="timing">Timings: 4:00 AM - 9:00 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- Chokhi Dhani -->
+    <div class="attraction-card" onclick="showDetails('Moti Dungri Ganesh Jii', 'Moti Dungri Ganesh Ji Temple, situated on Moti Dungri Hill in Jaipur, is a revered Hindu temple dedicated to Lord Ganesha, the remover of obstacles and the god of beginnings. Built in the early 20th century, the temple is known for its stunning architecture, featuring a blend of Indian and Moorish styles, with a striking white facade and beautiful interiors. The temple houses a significant idol of Lord Ganesha, which attracts a large number of devotees, especially during festivals like Ganesh Chaturthi. Visitors often ascend the hill to reach the temple', 'ganeshji.png', '4:00 AM - 9:00 PM', 'FREE for  All')">
+        <img src="ganeshji.png" alt="Chokhi Dhani">
+        <div class="attraction-details">
+            <h3>Moti Dungri Ganesh Ji</h3>
+            <p>Moti Dungri Ganesh Ji Temple, situated on Moti Dungri Hill in Jaipur, is a revered Hindu temple dedicated to Lord Ganesha, the remover of obstacles and the god of beginnings.</p>
+            <p class="timing">Timings: 4:00 AM - 9:00 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- Repeat Chokhi Dhani -->
+    <div class="attraction-card" onclick="showDetails('Jawahar Kala Kendra (JKK)', 'Jawahar Kala Kendra (JKK) in Jaipur is a prominent cultural center dedicated to the promotion of the arts, crafts, and heritage of Rajasthan and India. Established in 1986, the center was designed by renowned architect Charles Correa and features a distinctive architectural style that reflects traditional Rajasthani elements blended with modern aesthetics. JKK hosts a variety of artistic events, including exhibitions, workshops, performances, and festivals, making it a vibrant hub for artists, artisans, and art enthusiasts. The complex includes galleries, an open-air theater, and spaces for various art forms, providing a platform for both established and emerging artists. With its commitment to fostering creativity and cultural exchange, Jawahar Kala Kendra plays a vital role in preserving and promoting Rajasthan’s rich artistic heritage,', 'jkk.jpg', '9:00 AM - 9:00 PM', 'FREE for  All')">
+        <img src="jkk.jpg" alt="Chokhi Dhani">
+        <div class="attraction-details">
+            <h3>Jawahar Kala Kendra (JKK)</h3>
+            <p>Jawahar Kala Kendra (JKK) in Jaipur is a prominent cultural center dedicated to the promotion of the arts, crafts, and heritage of Rajasthan and India.</p>
+            <p class="timing">Timings: 9:00 AM - 9:00 PM</p>
+            <p class="charges">Entry Fee: FREE for  All</p>
+        </div>
+    </div>
+    <!-- Additional Attractions -->
+    <!-- Add 6 more unique attractions to reach 36 cards -->
+    <div class="attraction-card" onclick="showDetails('Albert Hall Museum', 'Albert Hall Museum is the oldest museum in Rajasthan, showcasing an extensive collection of artifacts.Albert Hall Museum, located in Jaipur, Rajasthan, is one of the oldest museums in the state, established in 1880 and named after King Albert Edward of Britain. This stunning example of Indo-Saracenic architecture features intricate latticework, beautiful domes, and vibrant murals that reflect the rich cultural heritage of Rajasthan. The museum houses an extensive collection of artifacts, including traditional textiles, weapons, paintings, and decorative arts, providing insight into the regions history and artistry.', 'alberthall.webp', '9:00 AM - 5:00 PM', '₹40 for Indians, ₹200 for Foreigners')">
+        <img src="alberthall.webp" alt="Albert Hall Museum">
+        <div class="attraction-details">
+            <h3>Albert Hall Museum</h3>
+            <p>Albert Hall Museum is the oldest museum in Rajasthan, showcasing an extensive collection of artifacts.</p>
+            <p class="timing">Timings: 9:00 AM - 5:00 PM</p>
+            <p class="charges">Entry Fee: ₹40 for Indians, ₹200 for Foreigners</p>
+        </div>
+    </div>
+    <div class="attraction-card" onclick="showDetails('Birla Temple', 'Birla Mandir, also known as Laxmi Narayan Temple, is a prominent Hindu temple located in Jaipur, Rajasthan. Constructed in 1988 by the Birla family, the temple is dedicated to Lord Vishnu and Goddess Laxmi, embodying the principles of peace and harmony. The temple is renowned for its stunning white marble architecture, featuring intricate carvings, beautiful domes, and spacious courtyards that create a serene atmosphere. The interiors are adorned with exquisite murals and sculptures depicting scenes from Hindu mythology, enhancing its spiritual ambiance. Set against the backdrop of the Aravalli hills, Birla Mandir offers panoramic views of the city and is a popular destination for both worshippers and tourists', 'birlamandir.jpg', '6:00 AM - 12:00 PM, 4:00 PM - 8:00 PM', 'Free Entry')">
+        <img src="birlamandir.jpg" alt="Birla Temple">
+        <div class="attraction-details">
+            <h3>Birla Temple</h3>
+            <p>Birla Temple is a beautiful temple made of white marble, dedicated to Lord Vishnu and Goddess Lakshmi.</p>
+            <p class="timing">Timings: 6:00 AM - 12:00 PM, 4:00 PM - 8:00 PM</p>
+            <p class="charges">Free Entry</p>
+        </div>
+    </div>
+    <div class="attraction-card" onclick="showDetails('Patrika Gate', 'Patrika Gate, located at Jawahar Circle in Jaipur, is a vibrant and iconic architectural marvel that serves as a gateway to the city. Built as a tribute to Rajasthans rich heritage, the gate features intricate carvings, vibrant murals, and stunning pillars, each depicting elements of Rajasthani culture and history. The vibrant colors and detailed artwork make it a popular spot for photography and cultural exploration. Patrika Gate also symbolizes the blend of tradition and modernity, making it a significant landmark in Jaipur for both locals and tourists.', 'patrikagate.jpg', '6:00 AM - 10:00 PM', 'Free Entry')">
+        <img src="patrikagate.jpg" alt="Sanganer Fort">
+        <div class="attraction-details">
+            <h3>Patrika Gate</h3>
+            <p>Patrika Gate, located at Jawahar Circle in Jaipur, is a vibrant and iconic architectural marvel that serves as a gateway to the city.</p>
+            <p class="timing">Timings: 6:00 AM - 10:00 PM</p>
+            <p class="charges">Entry Fee: Free Entry</p>
+        </div>
+    </div>
+    <div class="attraction-card" onclick="showDetails('Galta Ji Temple', 'Galta Ji Temple, also known as Galta Kund, is a historic and sacred Hindu pilgrimage site located about 10 kilometers from Jaipur, Rajasthan. Nestled amidst the Aravalli hills, the temple complex is renowned for its stunning architecture and picturesque surroundings. Dedicated to Lord Hanuman and other deities, Galta Ji features a series of intricately designed temples, pavilions, and sacred water tanks known as kunds. The main temple houses an idol of Lord Hanuman, and the site is particularly famous for its sacred water, believed to have healing properties', 'galtaji.jpeg', '5:00 AM - 9:00 PM', 'Free Entry')">
+        <img src="galtaji.jpeg" alt="Galta Ji Temple">
+        <div class="attraction-details">
+            <h3>Galta Ji Temple</h3>
+            <p>Galta Ji Temple, also known as the Monkey Temple, is famous for its natural springs and many monkeys.</p>
+            <p class="timing">Timings: 5:00 AM - 9:00 PM</p>
+            <p class="charges">Free Entry</p>
+        </div>
+    </div>
+    <div class="attraction-card" onclick="showDetails('Jal Mahal', 'Sagar Lake, located on the outskirts of Jaipur, is a tranquil and picturesque water body that offers a serene escape from the bustling city. Surrounded by lush greenery and rolling hills, the lake is an ideal spot for nature lovers and those seeking a peaceful retreat. It features walking paths, picnic areas, and viewpoints that allow visitors to enjoy the scenic beauty and observe various bird species. The lake is also a popular destination for photography, especially during sunrise and sunset when the landscape is bathed in golden light', 'jalmahal.jpg', '5:00 AM - 10:00 PM', 'Entry Fee: Free Entry')">
+        <img src="jalmahal.jpg">
+        <div class="attraction-details">
+            <h3>Jal Mahal</h3>
+            <p>Jal Mahal, located on the outskirts of Jaipur, is a tranquil and picturesque water body that offers a serene escape from the bustling city.</p>
+            <p class="timing">Timings: 5:00 AM - 10:00 PM</p>
+            <p class="charges">Entry Fee: Free Entry</p>
+        </div>
+    </div>
+   
+    <div class="attraction-card" onclick="showDetails('Sisodia Rani Garden', 'Sisodia Rani Garden, located on the outskirts of Jaipur, is a beautiful royal garden built in the 18th century by Maharaja Sawai Jai Singh II for his queen, Sisodia Rani. This garden is an exquisite example of Mughal and Rajput architecture, featuring terraced landscapes, vibrant floral arrangements, and charming fountains. The layout includes a series of cascading waterfalls, pavilions, and intricately designed pathways that create a serene atmosphere for visitors. Adorned with murals depicting scenes from the royal court and nature, the garden is not only a delightful spot for leisurely strolls but also a place of historical significance', 'sisodia-rani-palace-and.jpg', '9:00 AM - 5:00 PM', '₹50 for Indians, ₹200 for Foreigners')">
+        <img src="sisodia-rani-palace-and.jpg" alt="Sisodia Rani Garden">
+        <div class="attraction-details">
+            <h3>Sisodia Rani Garden</h3>
+            <p>Sisodia Rani Garden is a beautiful garden with fountains and intricate carvings, perfect for a peaceful day.</p>
+            <p class="timing">Timings: 9:00 AM - 5:00 PM</p>
+            <p class="charges">Entry Fee: ₹50 for Indians, ₹200 for Foreigners</p>
+        </div>
+    </div>
+</div>
+
+<!-- Enlarged View -->
+<div class="enlarged" id="enlargedView">
+    <button class="close-btn" onclick="hideDetails()">✖</button>
+    <div class="enlarged-content">
+        <img src="" id="enlargedImage" alt="Enlarged View">
+        <div class="enlarged-details">
+            <h3 id="enlargedTitle"></h3>
+            <p id="enlargedDescription"></p>
+            <p class="timing">Timings: <span id="enlargedTiming"></span></p>
+            <p class="charges">Entry Fee: <span id="enlargedCharges"></span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDetails(title, description, image, timing, charges) {
+        document.getElementById('enlargedTitle').innerText = title;
+        document.getElementById('enlargedDescription').innerText = description;
+        document.getElementById('enlargedImage').src = image;
+        document.getElementById('enlargedTiming').innerText = timing;
+        document.getElementById('enlargedCharges').innerText = charges;
+        document.getElementById('enlargedView').classList.add('show');
+    }
+
+    function hideDetails() {
+        document.getElementById('enlargedView').classList.remove('show');
+    }
+</script>
+
+<footer>
+    <p>&copy;© 2024 Pinkcity Parichay. All rights reserved</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaipur - The Pink City</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+            background: #f0f4f7;
+            scroll-behavior: smooth;
+        }
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0);
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+        .nav-bar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 0 15px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .nav-bar a:hover {
+            color: #e34076;
+            transform: scale(1.1);
+        }
+        .nav-bar.scroll {
+            background: #ffffff24;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .hero {
+            height: 700px;
+            background: url('nargarh.avif') no-repeat center center/cover;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            margin-top: 70px;
+            overflow: hidden;
+            animation: fadeIn 3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .hero h2 {
+            font-size: 80px;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 2s ease-out;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .section {
+            padding: 80px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .section:nth-of-type(even) {
+            background: #ffffff;
+        }
+        .section:nth-of-type(odd) {
+            background: #f9f9f9;
+        }
+        .section-content {
+            max-width: 1000px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+        }
+        .section-content h2 {
+            font-size: 50px;
+            margin: 0 0 30px;
+            font-weight: bold;
+            color: #e34076;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #e34076 0%, #ffcc00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px;
+            animation: glow 2s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0% { text-shadow: 0 0 10px rgba(255, 105, 180, 0.7); }
+            50% { text-shadow: 0 0 20px rgba(255, 105, 180, 0.8); }
+            100% { text-shadow: 0 0 10px rgba(255, 105, 180, 0.7); }
+        }
+        .section-content p {
+            font-size: 22px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+        .section-content p:hover {
+            color: #e34076;
+        }
+        .section-content button {
+            background-color: #e34076;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            margin: 20px auto 0;
+        }
+        .section-content button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        .section-content button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .section-content button:hover {
+            background-color: #e34076;
+            transform: scale(1.05);
+        }
+        .section-content img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 12px;
+            margin: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .section-content img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .section-content .collage {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .footer {
+            background: #e34076;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        /* Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Modern Form Styles */
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+        .contact-form h3 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #e34076;
+            text-align: center;
+            animation: slideIn 0.8s ease-out;
+        }
+        .contact-form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .contact-form input, .contact-form select, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+            border-color: #e34076;
+            outline: none;
+        }
+        .contact-form button {
+            background-color: #e34076
+            ;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: block;
+            margin: 20px auto 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-form button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+        .contact-form button:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .contact-form button:hover {
+            background-color: #e34076;
+            transform: scale(1.05);
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar" id="navBar">
+        <a href="#home">Home</a>
+        <a href="#history">History</a>
+        <a href="#attractions">Attractions</a>
+        <a href="#food">Food & Cafes</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+
+    <div id="home" class="hero">
+        <h2>Pink City Parichay</h2>
+    </div>
+
+    <div id="history" class="section">
+        <div class="section-content reveal">
+            <h2>History of Jaipur</h2>
+            <p>Jaipur, also known as the Pink City, is the capital of Rajasthan, India. Founded in 1727 by Maharaja Sawai Jai Singh II, Jaipur is known for its historic palaces, forts, and vibrant culture. Discover its fascinating past and rich heritage.</p>
+            <button onclick="location.href='history.html'">Explore More</button>
+        </div>
+    </div>
+
+    <div id="attractions" class="section">
+        <div class="section-content reveal">
+            <h2>Attractions</h2>
+            <p>Explore the majestic attractions of Jaipur, including the Amber Fort, Hawa Mahal, and City Palace. Each site offers a glimpse into the city's architectural brilliance and history.</p>
+            <div class="collage">
+                <img src="amber.jpg" alt="Amber Fort">
+                <img src="hawamahal2.jpg" alt="Hawa Mahal">
+                <img src="citypalace.webp" alt="City Palace">
+            </div>
+            <button onclick="location.href='attractions.html'">Discover More</button>
+        </div>
+    </div>
+
+    <div id="food" class="section">
+        <div class="section-content reveal">
+            <h2>Food & Cafes</h2>
+            <p>Experience Jaipur's diverse culinary scene, from traditional Rajasthani dishes to modern cafes. Indulge in local delicacies and explore trendy spots across the city.</p>
+            <div class="collage">
+                <img src="rajasthani.jpg" alt="Rajasthani Dishes">
+                <img src="https://via.placeholder.com/700x400.png?text=Traditional+Cafe" alt="Traditional Cafe">
+                <img src="https://via.placeholder.com/700x400.png?text=Modern+Cafe" alt="Modern Cafe">
+            </div>
+            <button onclick="location.href='food.html'">Taste More</button>
+        </div>
+    </div>
+
+    <div id="events" class="section">
+        <div class="section-content reveal">
+            <h2>Events</h2>
+            <p>Stay updated with the latest events happening in Jaipur. From cultural festivals to art exhibitions, find out what's happening in the city and plan your visit accordingly.</p>
+            <div class="collage">
+                <img src="https://via.placeholder.com/700x400.png?text=Festival" alt="Festival">
+                <img src="https://via.placeholder.com/700x400.png?text=Cultural+Performance" alt="Cultural Performance">
+                <img src="https://via.placeholder.com/700x400.png?text=Local+Event" alt="Local Event">
+            </div>
+            <button onclick="location.href='events.html'">See Events</button>
+        </div>
+    </div>
+
+    <div id="contact" class="section">
+        <div class="section-content reveal">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or would like to book a guide and trip, please fill out the form below:</p>
+            <div class="contact-form">
+                <h3>Let's Book Your Guide and Trip</h3>
+                <form id="contactForm" action="mailto:dev.22bcan556@jecrcu.edu.in" method="post" enctype="text/plain">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required>
+
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" required>
+
+                    <label for="numberOfPeople">Number of People:</label>
+                    <input type="number" id="numberOfPeople" name="numberOfPeople" required min="1">
+
+                    <label for="hostelStay">Hostel Stay Type:</label>
+                    <select id="hostelStay" name="hostelStay" required>
+                        <option value="2star">2 Star</option>
+                        <option value="3star">3 Star</option>
+                        <option value="4star">4 Star</option>
+                        <option value="5star">5 Star</option>
+                    </select>
+
+                    <label for="numberOfDays">Number of Days:</label>
+                    <input type="number" id="numberOfDays" name="numberOfDays" required min="1">
+
+                    <label for="email">Email ID:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="guide">Request a Guide:</label>
+                    <input type="checkbox" id="guide" name="guide">
+
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Jaipur City Blog. All rights reserved. <a href="#home">Back to Top</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling functionality for navigation bar
+        document.querySelectorAll('.nav-bar a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Change nav bar appearance on scroll
+        window.addEventListener('scroll', function() {
+            const navBar = document.getElementById('navBar');
+            if (window.scrollY > 50) {
+                navBar.classList.add('scroll');
+            } else {
+                navBar.classList.remove('scroll');
+            }
+        });
+
+        // Reveal Animation on Scroll
+        document.addEventListener("DOMContentLoaded", () => {
+            const reveals = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            reveals.forEach(reveal => {
+                observer.observe(reveal);
+            });
+        });
+    </script>
+</body>
+</html>
